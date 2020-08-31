@@ -388,6 +388,10 @@
 									data-target="#modalTopUp">
 								<i data-feather="arrow-up"></i> topup
 							</button>
+							<button class="ml-3 btn-accent item-select-control" data-label="changeWeight" data-toggle="modal"
+									data-target="#modalChangeWeight">
+								<i data-feather="edit"></i> verander gewicht
+							</button>
 
 							<div class="collapse-menu item-select-control ml-3" data-sesam-target="collapseMenuUsers">
 								<button class="btn-icon" data-sesam-trigger="collapseMenuUsers"><span
@@ -405,6 +409,8 @@
 							<div class="row table-head py-3 px-2">
 								<div class="col text-modern"><strong>Naam</strong></div>
 								<div class="col text-modern"><strong>Tegoed</strong></div>
+								<div class="col text-modern"><strong>Gewicht</strong></div>
+
 							</div>
 						</div>
 						<div class="table-data" data-label="listedUsers">
@@ -722,10 +728,15 @@
 							   name="name" required>
 						<label for="addUser-name">naam</label>
 					</div>
-					<div class="input-group floating-label">
+					<div class="input-group mb-3 floating-label">
 						<input type="number" autocomplete="off" data-clear-field id="addUser-credit"
 							   class="form-control" name="credit" required>
 						<label for="addUser-credit">tegoed</label>
+					</div>
+					<div class="input-group floating-label">
+						<input type="number" autocomplete="off" data-clear-field id="addUser-weight"
+							   class="form-control" name="weight" required>
+						<label for="addUser-weight">weight</label>
 					</div>
 					<hr class="mt-4 mb-3">
 					<div class="input-group d-flex align-items-center">
@@ -831,6 +842,10 @@
 		</form>
 	</div>
 </div>
+
+
+
+
 <div class="modal" id="modalTopUp" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modalTopUpLabel"
 	 aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
@@ -857,6 +872,35 @@
 		</div>
 	</div>
 </div>
+
+<div class="modal" id="modalChangeWeight" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modalChangeWeightLabel"
+	 aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="modalChangeWeightLabel">Verander Gewicht</h5>
+				<button type="button" class="close d-none" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true"><i data-feather="x"></i></span>
+				</button>
+			</div>
+			<form id="changeWeight">
+				<div class="modal-body">
+					<div class="input-group floating-label">
+						<input type="number" data-clear-field id="weight-credit" step="1" name="weight"
+							   class="form-control" required>
+						<label for="weight-credit">Gewicht</label>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn" data-dismiss="modal"><i data-feather="x"></i>annuleren</button>
+					<button type="submit" class="btn btn-blue"><i data-feather="edit"></i>Verander gewicht</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
 <div class="modal" id="modalGoSudo" data-backdrop="static" tabindex="-1" role="dialog"
 	 aria-labelledby="modalGoSudoLabel" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">

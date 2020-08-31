@@ -34,7 +34,7 @@ export const app = {
         this.hidePaneOptions();
         this.checkRecordAmount();
         settings.loadSupportContent();
-    },
+	},
 
     cache() {
         this.alerts = {
@@ -132,7 +132,7 @@ export const app = {
 
         this.db = new Dexie('users');
         this.db.version(1).stores({
-            users: "id,name,credit",
+            users: "id,name,credit,weight",
             items: "id,name,profit,type,price",
             logs: "date,user,item,amount,price"
         });
@@ -175,8 +175,9 @@ export const app = {
         status.add('dexieDeleteLogs');
 
         this.db.logs
-			.where('amount').equals(0)
-			.delete()
+			//.where('amount').above(0)
+			//.delete()
+			.clear()
             .then(function (deleteCount) {
                 //console.log( "Deleted " + deleteCount + " log-objects");
             });

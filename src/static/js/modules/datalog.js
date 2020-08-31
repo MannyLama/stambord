@@ -1,4 +1,4 @@
-import {app, test, fetchAPI, generateID, callerName} from './index.js';
+import {app, callerName} from './index.js';
 
 const status = new callerName('datalog');
 
@@ -38,7 +38,8 @@ export const datalog = {
             date: entry.date,
             user: {
                 id: entry.user.id,
-                name: entry.user.name
+                name: entry.user.name,
+				weight: entry.user.weight
             },
             item: entry.item,
             amount: entry.amount,
@@ -90,10 +91,10 @@ export const datalog = {
                         <span class="d-block">€${i.price.toFixed(2)}</span>
                     </div>
                 </label>
-            `
+            `;
             this.posItems.prepend(item);
         })
     }
-}
+};
 
 datalog.initialize();
