@@ -1,0 +1,16 @@
+{
+    "liveServer.settings.port": 5502,
+
+    "relativePath.ignore": [
+        "**/node_modules/**",
+        "**/*.dll",
+        "**/obj/**",
+        "**/objd/**",
+        "**/out/**",
+        "**/node_modules/**",
+    ],
+    "files.exclude": {
+        "**/node_modules": true
+    }
+}
+

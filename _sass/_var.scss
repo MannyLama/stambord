@@ -1,0 +1,51 @@
+:root {
+    --blue600: #25496E;
+    --blue500: #35689D;
+    --blue300: #B1D3F2;
+    --blue200: #f5f5f5;
+    --info: #17a2b8;
+    --blue200: #f5f5f5;
+    --danger300: #f8d7da;
+    --danger400: #D26B68;
+    --danger600: #7B2522;
+    --warning300: #FFFCF5;
+    --warning500: #F7E2A7;
+    --warning600: #886D2F;
+    
+    --tabpaneBackground: white;
+    --textColorMain: #212529;
+    --asideBackground: #35689d;
+    --tableBorders: #dee2e6;
+    --modalBody: white;
+    --toasts: white;
+    --inputFieldsBorder: #b4b4b4;
+    --inputFieldsFocused: #35689d;
+    --errorText: #dd1e17;
+    
+    --btnLight: #e2e6ea;
+    --btnLightColor: #212529;
+    
+    [dark-mode="true"] {
+        --blue600: #25496E;
+        --blue500: #35689D;
+        --blue300: #344b60;
+        --blue200: #0c0c0c;
+        --info: #158fa2;
+        --danger300: #f8d7da;
+        --danger400: #D26B68;
+        --danger600: #7b3734;
+        
+        --tabpaneBackground: #212121;
+        --textColorMain: #bad1e7;
+        --asideBackground: #1b344e;
+        --tableBorders: #4b4d4e;
+        --modalBody: #212121;
+        --toasts: #0c0c0c;
+        --inputFieldsBorder: #4b4d4e;
+        --inputFieldsFocused: #80bdff;
+        --errorText: #D26B68;
+        
+        --btnLight: #545556;
+        --btnLightColor: white;
+    }
+}
