@@ -93,7 +93,6 @@ export const uiControl = {
 		content === undefined ? content = 'inner content' : content = content;
 		parent === undefined ? parent = '' : parent = `data-parent="${parent}"`;
 
-		console.log(content);
 		const renderedHTML = `
             <div data-target="#generatedCollapse${this.createCollapseIndex}" data-toggle="collapse" aria-expanded="false" aria-controls="generatedCollapse${this.createCollapseIndex}" ${parent}>
                 <${title.el}>${title.content}</${title.el}>
