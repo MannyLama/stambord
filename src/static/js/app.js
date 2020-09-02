@@ -223,7 +223,6 @@ export const app = {
 		status.add('createToast');
 
 		let now, moment;
-
 		function addZero(i) {
 			if (i < 10) {
 				i = "0" + i;
@@ -263,17 +262,13 @@ export const app = {
 
 		toast.addEventListener('animationend', function () {
 			toast.classList.add('animated', 'fadeOutDown', 'delay-3s')
-		})
+		});
 
 		document.querySelector('#toastContainer').appendChild(toast);
-
-		try {
-			feather.replace();
-		} catch (e) {
-			console.log(e);
-		}
+		feather.replace();
 
 		$(`[data-toast="toastIndex${this.toastIndex}"]`).toast('show');
+
 		let secondTime = false;
 		toast.onanimationend = function () {
 			if (secondTime){
