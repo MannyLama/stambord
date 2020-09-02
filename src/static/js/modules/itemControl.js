@@ -28,7 +28,6 @@ export const itemControl = {
         this.addItemForm.addEventListener('submit', (event) => {
             event.preventDefault();
             status.log('user is being added');
-
             const formData = new FormData(this.addItemForm);
             this.add({
                 name: formData.get('name'),
@@ -39,6 +38,7 @@ export const itemControl = {
 
             // empty fields
             app.clearFields(event.target);
+			app.playSound();
 
             if (formData.get('add-multiple') !== 'on') $('#modalAddItem').modal('hide');
         });
@@ -46,7 +46,7 @@ export const itemControl = {
         this.tabFunctions.addEventListener('click', (event) => {
             const targetBtn = event.target.closest('button').dataset.label;
             const selectedItem = document.querySelector('#nav-items [data-label="listedItems"] input:checked').value;
-
+            app.playSound();
             switch (targetBtn) {
                 case 'removeItem':
                     this.delete(selectedItem);

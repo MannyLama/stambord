@@ -31,18 +31,21 @@ export const uiControl = {
 			this.updateUserString();
 
 			if (event.target.closest('[data-label="posCheckoutFilterItemType"]') != null) {
+				app.playSound();
 				this.posItemsShowType(event.target.closest('[data-label="posCheckoutFilterItemType"] button'))
 			}
 		});
 
 		document.body.addEventListener('focusout', (event) => {
-			const floatingLabel = event.target.closest('.input-group.floating-label')
+			app.playSound();
+			const floatingLabel = event.target.closest('.input-group.floating-label');
 
 			if (floatingLabel != null && floatingLabel.querySelector('input').value !== '') floatingLabel.classList.add('input-group-filled');
 			else if (floatingLabel != null && floatingLabel.classList.remove('input-group-filled')) ; //todo
 		});
 
 		document.querySelector('#modalScreenWidth .modal-footer').addEventListener('click', (event) => {
+			app.playSound();
 			this.dismissScreenWidthModal(event.target.closest('button').dataset.label)
 
 		})
@@ -93,7 +96,6 @@ export const uiControl = {
 		content === undefined ? content = 'inner content' : content = content;
 		parent === undefined ? parent = '' : parent = `data-parent="${parent}"`;
 
-		console.log(content);
 		const renderedHTML = `
             <div data-target="#generatedCollapse${this.createCollapseIndex}" data-toggle="collapse" aria-expanded="false" aria-controls="generatedCollapse${this.createCollapseIndex}" ${parent}>
                 <${title.el}>${title.content}</${title.el}>

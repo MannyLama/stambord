@@ -1,6 +1,7 @@
 import {app, callerName, datalog} from './index.js';
 
 const status = new callerName('itemControl');
+const INTEREST = 0.20;
 
 export const posCheckout = {
 	initialize() {
@@ -29,6 +30,7 @@ export const posCheckout = {
 
 		this.cancelCheckout.addEventListener('click', () => {
 			app.readyState();
+			app.playSound();
 			this.quantity = 1;
 			this.amountSelector.classList.add('d-none');
 			try{
@@ -41,8 +43,7 @@ export const posCheckout = {
 		this.posCheckoutConfirmForm.addEventListener('submit', (event) => {
 			status.log('an item was bought');
 			event.preventDefault();
-
-			// const formData = new FormData(this.posCheckoutConfirmForm);
+			app.playSound();
 			this.confirmCheckout();
 		});
 
@@ -69,7 +70,7 @@ export const posCheckout = {
 	async gatherData() {
 		status.add('gatherData');
 
-		this.intrest = 0.20;
+		this.intrest = INTEREST;
 
 		this.checkoutItemData = await app.db.items.get(app.checkoutItem);
 		this.checkoutUserData = await app.db.users.get(app.checkoutUser);
@@ -90,12 +91,11 @@ export const posCheckout = {
 	checkCredit() {
 		if (this.checkoutUserData.credit < this.checkoutItemData.price * this.quantity) {
 			this.negativeCredit = true;
-			this.intrest = 0.20;
+			this.intrest = INTEREST;
 		} else {
 			this.negativeCredit = false;
 			this.intrest = 0;
 		}
-		status.log('negativeCredit ' + this.negativeCredit);
 	},
 
 	showAmountSelector() {
@@ -107,8 +107,7 @@ export const posCheckout = {
 	renderCheckoutDisplay() {
 		status.add('renderCheckoutDisplay');
 
-		status.log('negativeCredit ' + this.negativeCredit)
-		let intrestText = '+ 20% intrest'
+		let intrestText = '<br>+ 20% intrest';
 
 		if (this.negativeCredit === true) {
 			document.querySelector('#modalPosConfirm .modal-content').classList.add('modal-danger');
@@ -169,7 +168,8 @@ export const posCheckout = {
 		status.add('calculatePrice');
 
 		this.amount = parseFloat(amount);
-		this.checkoutItemData.price = this.checkoutItemData.price[this.amount];
+		//this.checkoutItemData.price = this.checkoutItemData.price[this.amount];
+		this.quantity = parseInt(amount, 10);
 
 		this.checkCredit();
 		this.calculateNewCredit();
@@ -182,23 +182,16 @@ export const posCheckout = {
 		this.posCheckoutChangeQuantity = document.querySelector('#posCheckoutConfirm [data-label="posCheckoutChangeQuantity"]');
 		this.posQuantity = document.querySelector('[id=posCheckoutQuantity]');
 		this.posCheckoutChangeQuantity.addEventListener('click', (event) => {
-			//console.log(event.target.closest('button[data-action]'));
 			if (event.target.getAttribute('data-action') === "plus"){
-				console.log("plus");
+				app.playSound();
 				this.posQuantity.value = parseInt(this.posQuantity.value, 10) + 1;
-				this.quantity = parseInt(this.posQuantity.value, 10);
-				this.checkCredit();
-				this.calculateNewCredit();
-				this.renderCheckoutDisplay();
+				this.calculatePrice(this.posQuantity.value);
 			}
 			if (event.target.getAttribute('data-action') === "min"){
-				console.log("min");
+				app.playSound();
 				if (parseInt(this.posQuantity.value,10) > 1){ //check for minimal 1
 					this.posQuantity.value = parseInt(this.posQuantity.value, 10) - 1;
-					this.quantity = parseInt(this.posQuantity.value, 10);
-					this.checkCredit();
-					this.calculateNewCredit();
-					this.renderCheckoutDisplay();
+					this.calculatePrice(this.posQuantity.value);
 				}
 			}
 		})
@@ -224,7 +217,7 @@ export const posCheckout = {
 			else
 				console.log("Nothing was updated - there were no friend with primary key: 2");
 		});
-		$('#carouselPosSteps').carousel(0);
+		//$('#carouselPosSteps').carousel(0);
 
 		datalog.addLog({
 			user: {

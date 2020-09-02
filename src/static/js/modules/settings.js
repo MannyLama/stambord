@@ -38,16 +38,16 @@ export const settings = {
 
         this.signInForm.addEventListener('submit', (event) => {
             event.preventDefault();
-            status.log('sombody tried to login')
+            status.log('sombody tried to login');
 
             let formData = new FormData(this.signInForm);
-            const password = formData.get('password')
+            const password = formData.get('password');
 
             this.checkPassword(password);
 
             // empty fields
             app.clearFields(event.target);
-        })
+        });
 
         this.tabFunctions.addEventListener('click', (event) => {
             const targetBtn = event.target.closest('button').dataset.label;
@@ -64,10 +64,10 @@ export const settings = {
                     app.createToast('Barbord', 'Alle gegevens werden succesvol ingeladen')
                     break;
                 default:
-                    status.log('you didn\'t hit an available button')
+                    status.log('you didn\'t hit an available button');
                     break;
             }
-        })
+        });
 
         this.changePasswordForm.addEventListener('submit', (event) => {
             event.preventDefault();
@@ -83,21 +83,21 @@ export const settings = {
                 this.changePassword(formData.get('newPassword'))
             } else if (readCookie('password') !== null && a(formData.get('currentPassword')) == getCookie('password')) {
                 // als password ingesteld is
-                status.log(`passwoord (${formData.get('currentPassword')}) is juist, kan veranderen`)
+                status.log(`passwoord (${formData.get('currentPassword')}) is juist, kan veranderen`);
                 this.changePassword(formData.get('newPassword'))
             } else {
-                status.log('something went wrong')
+                status.log('something went wrong');
                 app.errorText('currentPassword', 'Het huidige wachtwoord is niet correct, probeer opnieuw');
             }
 
             // empty fields
             app.clearFields(event.target);
-        })
+        });
 
         this.dataRemoveForm.addEventListener('submit', async (event) => {
             event.preventDefault();
-            status.log('data will ben removed')
-            app.createToast('Gegevens', 'Gegevens worden verwijderd')
+            status.log('data will ben removed');
+            app.createToast('Gegevens', 'Gegevens worden verwijderd');
 
             await this.dataRemove();
         })
