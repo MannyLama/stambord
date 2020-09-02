@@ -25,9 +25,9 @@ export const userControl = {
 		status.add('addListeners');
 
 		this.addUserForm.addEventListener('submit', (event) => {
+			app.playSound();
 			status.log('user is being added');
 			event.preventDefault();
-			app.playSound();
 
 			const formData = new FormData(this.addUserForm);
 			this.add({
@@ -43,9 +43,9 @@ export const userControl = {
 		});
 
 		this.topUpForm.addEventListener('submit', (event) => {
+			app.playSound();
 			event.preventDefault();
 			status.log('credit is being added to user');
-			app.playSound();
 
 			const selectedItem = document.querySelector('#nav-users [data-label="listedUsers"] input:checked').value;
 			const formData = new FormData(this.topUpForm);
@@ -54,9 +54,9 @@ export const userControl = {
 		});
 
 		this.changeWeightForm.addEventListener('submit', (event) => {
+			app.playSound();
 			event.preventDefault();
 			status.log('Weight is being changed of the user');
-			app.playSound();
 
 			const selectedItem = document.querySelector('#nav-users [data-label="listedUsers"] input:checked').value;
 			const formData = new FormData(this.changeWeightForm);
@@ -67,12 +67,10 @@ export const userControl = {
 		this.tabFunctions.addEventListener('click', (event) => {
 			const targetBtn = event.target.closest('button').dataset.label;
 			app.playSound();
-
 			let selectedItem;
 			try{
 				selectedItem = document.querySelector('#nav-users [data-label="listedUsers"] input:checked').value;
 			} catch (e) {
-
 			}
 			switch (targetBtn) {
 				case 'removeUser':

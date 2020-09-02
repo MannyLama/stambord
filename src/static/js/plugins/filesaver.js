@@ -60,7 +60,7 @@ function click(node) {
 	try {
 		node.dispatchEvent(new MouseEvent('click'))
 	} catch (e) {
-		var evt = document.createEvent('MouseEvents')
+		var evt = document.createEvent('MouseEvents');
 		evt.initMouseEvent('click', true, true, window, 0, 0, 0, 80,
 			20, false, false, false, false, 0, null);
 		node.dispatchEvent(evt)
@@ -160,7 +160,7 @@ var saveAs = _global.saveAs || (
 					var URL = _global.URL || _global.webkitURL;
 					var url = URL.createObjectURL(blob);
 					if (popup) popup.location = url;
-					else location.href = url
+					else location.href = url;
 					popup = null; // reverse-tabnabbing #460
 					setTimeout(function () {
 						URL.revokeObjectURL(url)

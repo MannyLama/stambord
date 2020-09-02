@@ -36,18 +36,16 @@ export const uiControl = {
 			}
 		});
 
-		document.body.addEventListener('focusout', (event) => {
-			app.playSound();
+		/*document.body.addEventListener('focusout', (event) => {
 			const floatingLabel = event.target.closest('.input-group.floating-label');
 
 			if (floatingLabel != null && floatingLabel.querySelector('input').value !== '') floatingLabel.classList.add('input-group-filled');
 			else if (floatingLabel != null && floatingLabel.classList.remove('input-group-filled')) ; //todo
-		});
+		});*/
 
 		document.querySelector('#modalScreenWidth .modal-footer').addEventListener('click', (event) => {
 			app.playSound();
 			this.dismissScreenWidthModal(event.target.closest('button').dataset.label)
-
 		})
 	},
 

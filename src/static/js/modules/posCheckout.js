@@ -29,8 +29,8 @@ export const posCheckout = {
 		// })
 
 		this.cancelCheckout.addEventListener('click', () => {
-			app.readyState();
 			app.playSound();
+			app.readyState();
 			this.quantity = 1;
 			this.amountSelector.classList.add('d-none');
 			try{
@@ -41,9 +41,9 @@ export const posCheckout = {
 		});
 
 		this.posCheckoutConfirmForm.addEventListener('submit', (event) => {
+			app.playSound();
 			status.log('an item was bought');
 			event.preventDefault();
-			app.playSound();
 			this.confirmCheckout();
 		});
 

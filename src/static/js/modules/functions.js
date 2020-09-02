@@ -9,7 +9,7 @@ export const logStatus = (functionName, file) => {
 
 export const fetchAPI = async (url) => {
     try {
-        let response = await fetch(url)
+        let response = await fetch(url);
         let data = await response.json();
         return data
     }
