@@ -30,6 +30,7 @@ export const posCheckout = {
 
 		this.cancelCheckout.addEventListener('click', () => {
 			app.readyState();
+			app.playSound();
 			this.quantity = 1;
 			this.amountSelector.classList.add('d-none');
 			try{
@@ -42,7 +43,7 @@ export const posCheckout = {
 		this.posCheckoutConfirmForm.addEventListener('submit', (event) => {
 			status.log('an item was bought');
 			event.preventDefault();
-
+			app.playSound();
 			this.confirmCheckout();
 		});
 
@@ -182,10 +183,12 @@ export const posCheckout = {
 		this.posQuantity = document.querySelector('[id=posCheckoutQuantity]');
 		this.posCheckoutChangeQuantity.addEventListener('click', (event) => {
 			if (event.target.getAttribute('data-action') === "plus"){
+				app.playSound();
 				this.posQuantity.value = parseInt(this.posQuantity.value, 10) + 1;
 				this.calculatePrice(this.posQuantity.value);
 			}
 			if (event.target.getAttribute('data-action') === "min"){
+				app.playSound();
 				if (parseInt(this.posQuantity.value,10) > 1){ //check for minimal 1
 					this.posQuantity.value = parseInt(this.posQuantity.value, 10) - 1;
 					this.calculatePrice(this.posQuantity.value);

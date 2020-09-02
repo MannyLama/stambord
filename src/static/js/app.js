@@ -4,6 +4,7 @@ import {callerName, dataExport, datalog, posCheckout, userControl, itemControl, 
 sesamCollapse.initialize();
 
 const status = new callerName('app');
+const clicksound = new Audio('static/sounds/click_sound.mp3');
 
 export const app = {
     initialize() {
@@ -268,7 +269,13 @@ export const app = {
             // el.style.display = 'block !important';
             el.innerHTML = content;
         })
-    }
+    },
+
+    playSound(){
+    	console.log("clickSound!");
+    	clicksound.play();
+	}
+
 };
 
 app.initialize();

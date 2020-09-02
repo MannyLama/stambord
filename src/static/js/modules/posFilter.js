@@ -20,6 +20,7 @@ export const posFilter = {
         status.add('addListeners');
 
         this.userFilter.addEventListener('keyup', (event) => {
+        	app.playSound();
             this.filter({
                 pane: userControl.posCheckout,
                 keys: ['name', 'id'],
@@ -28,6 +29,7 @@ export const posFilter = {
         });
 
         this.itemFilter.addEventListener('keyup', (event) => {
+        	app.playSound();
             this.filter({
                 pane: itemControl.posCheckout,
                 keys: ['name', 'id', 'type'],
