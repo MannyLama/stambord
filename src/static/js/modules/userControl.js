@@ -66,11 +66,13 @@ export const userControl = {
 
 		this.tabFunctions.addEventListener('click', (event) => {
 			const targetBtn = event.target.closest('button').dataset.label;
-			app.playSound();
+			app.playError();
+
 			let selectedItem;
 			try{
 				selectedItem = document.querySelector('#nav-users [data-label="listedUsers"] input:checked').value;
 			} catch (e) {
+
 			}
 			switch (targetBtn) {
 				case 'removeUser':

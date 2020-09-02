@@ -294,10 +294,7 @@ export const app = {
 		console.log("clickSound!");
 		await clicksound.play();
 	},
-	async playError() {
-		console.log("NoSound!");
-		await noSound.play();
-	}
+
 };
 
 app.initialize();
