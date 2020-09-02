@@ -26,12 +26,13 @@ export const itemControl = {
         // })
 
         this.addItemForm.addEventListener('submit', (event) => {
+        	app.playSound();
             event.preventDefault();
             status.log('user is being added');
             const formData = new FormData(this.addItemForm);
             this.add({
                 name: formData.get('name'),
-                profit: parseFloat(formData.get('price')),
+                profit: parseFloat(formData.get('profit')),
                 type: formData.get('itemType'),
                 price: [parseFloat(formData.get('priceSingle')), parseFloat(formData.get('priceDouble')), parseFloat(formData.get('priceExtra'))],
             });
@@ -44,9 +45,9 @@ export const itemControl = {
         });
 
         this.tabFunctions.addEventListener('click', (event) => {
-            const targetBtn = event.target.closest('button').dataset.label;
+			app.playSound();
+			const targetBtn = event.target.closest('button').dataset.label;
             const selectedItem = document.querySelector('#nav-items [data-label="listedItems"] input:checked').value;
-            app.playSound();
             switch (targetBtn) {
                 case 'removeItem':
                     this.delete(selectedItem);
@@ -90,6 +91,7 @@ export const itemControl = {
     add(entry) {
         status.log('this item will be added ' + entry.name);
         if (entry.id === undefined) {entry.id = `item${generateID()}`}
+        console.log("price =" + entry.price + "  profit= " + entry.profit);
         app.db.items.put({
             id: entry.id,
             name: entry.name,
@@ -125,7 +127,7 @@ export const itemControl = {
                         <small class="item-type-prices"><span class="text-modern">dubbel</span> €${i.price[1].toFixed(2)} &nbsp; – &nbsp; <span class="text-modern">extra</span> €${i.price[2].toFixed(2)}</small>
                     </div>
                 </label>
-            `
+            `;
             this.posItems.appendChild(item);
 
             const posCheckoutUser = document.createElement('div');

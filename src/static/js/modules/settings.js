@@ -37,6 +37,7 @@ export const settings = {
         status.add('addListeners');
 
         this.signInForm.addEventListener('submit', (event) => {
+        	app.playSound();
             event.preventDefault();
             status.log('sombody tried to login');
 
@@ -50,6 +51,7 @@ export const settings = {
         });
 
         this.tabFunctions.addEventListener('click', (event) => {
+        	app.playSound();
             const targetBtn = event.target.closest('button').dataset.label;
 
             switch (targetBtn) {
@@ -70,6 +72,7 @@ export const settings = {
         });
 
         this.changePasswordForm.addEventListener('submit', (event) => {
+        	app.playSound();
             event.preventDefault();
 
             const formData = new FormData(this.changePasswordForm);
@@ -95,6 +98,7 @@ export const settings = {
         });
 
         this.dataRemoveForm.addEventListener('submit', async (event) => {
+        	app.playSound();
             event.preventDefault();
             status.log('data will ben removed');
             app.createToast('Gegevens', 'Gegevens worden verwijderd');

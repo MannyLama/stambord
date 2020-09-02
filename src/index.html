@@ -47,7 +47,7 @@
 				<ul class="nav nav-tabs" id="nav-tab" role="tablist">
 					<li>
 						<a class="nav-item nav-link active" id="nav-start-tab" data-toggle="tab" href="#nav-start"
-						   role="tab" aria-controls="nav-start" aria-selected="true">
+						   role="tab" aria-controls="nav-start" aria-selected="true" onclick="CustomSound.playClick();">
 							<svg class="nav-tab-corner corner-top" xmlns="http://www.w3.org/2000/svg"
 								 viewBox="0 0 241.97 241.97"><title>corner_1</title>
 								<g data-name="corner">
@@ -69,7 +69,7 @@
 					</li>
 					<li>
 						<a class="nav-item nav-link" id="nav-log-tab" data-toggle="tab" href="#nav-log" role="tab"
-						   aria-controls="nav-log" aria-selected="false">
+						   aria-controls="nav-log" aria-selected="false" onclick="CustomSound.playClick();">
 							<svg class="nav-tab-corner corner-top" xmlns="http://www.w3.org/2000/svg"
 								 viewBox="0 0 241.97 241.97"><title>corner_1</title>
 								<g data-name="corner">
@@ -91,7 +91,7 @@
 					</li>
 					<li class="sudo-show">
 						<a class="nav-item nav-link" id="nav-users-tab" data-toggle="tab" href="#nav-users" role="tab"
-						   aria-controls="nav-users" aria-selected="false">
+						   aria-controls="nav-users" aria-selected="false" onclick="CustomSound.playClick();">
 							<svg class="nav-tab-corner corner-top" xmlns="http://www.w3.org/2000/svg"
 								 viewBox="0 0 241.97 241.97"><title>corner_1</title>
 								<g data-name="corner">
@@ -113,7 +113,7 @@
 					</li>
 					<li class="sudo-show">
 						<a class="nav-item nav-link" id="nav-items-tab" data-toggle="tab" href="#nav-items" role="tab"
-						   aria-controls="nav-items" aria-selected="false">
+						   aria-controls="nav-items" aria-selected="false" onclick="CustomSound.playClick();">
 							<svg class="nav-tab-corner corner-top" xmlns="http://www.w3.org/2000/svg"
 								 viewBox="0 0 241.97 241.97"><title>corner_1</title>
 								<g data-name="corner">
@@ -136,7 +136,8 @@
 					</li>
 					<li>
 						<a class="nav-item nav-link" id="nav-settings-tab" data-toggle="tab" href="#nav-settings"
-						   role="tab" aria-controls="nav-settings" aria-selected="false">
+						   role="tab" aria-controls="nav-settings" aria-selected="false"
+						   onclick="CustomSound.playClick();">
 							<svg class="nav-tab-corner corner-top" xmlns="http://www.w3.org/2000/svg"
 								 viewBox="0 0 241.97 241.97"><title>corner_1</title>
 								<g data-name="corner">
@@ -164,7 +165,7 @@
 							<i data-feather="help-circle"></i> <span class="text-modern"><small
 								class="fontw-500">help</small></span>
 						</li>
-						<li class="nav-option" data-sesam-trigger="menuCollapse">
+						<li class="nav-option" data-sesam-trigger="menuCollapse" onclick="CustomSound.playClick();">
 							<i data-feather="more-vertical"></i> <span class="menu-collapse-hidden text-modern"><small
 								class="fontw-500">menu<br>inklappen</small></span>
 						</li>
@@ -228,11 +229,13 @@
 									</div>
 									<div class="mx-4 mt-4">
 										<div class="row">
-											<button type="button" onclick="$('#carouselPosSteps').carousel('prev')"
+											<button type="button"
+													onclick="$('#carouselPosSteps').carousel('prev'); CustomSound.playClick();"
 													class="mb-0 text-modern d-flex align-items-center"><i
 													data-feather="arrow-left"></i> <span class="ml-2">kies een andere gebruiker</span>
 											</button>
-											<button type="button" onclick="$('#carouselPosSteps').carousel('prev')"
+											<button type="button"
+													onclick="$('#carouselPosSteps').carousel('prev'); CustomSound.playClick();"
 													class="ml-auto"><span
 													class="mb-0 text-modern d-flex align-items-center"
 													data-label="clickedUser">Gebruiker</span></button>
@@ -336,7 +339,7 @@
 								<i data-feather="plus"></i> nieuw item
 							</button>
 
-							<div class="collapse-menu item-select-control ml-3" data-sesam-target="collapseMenuItems">
+							<div class="collapse-menu tem-select-control ml-3" data-sesam-target="collapseMenuItems">
 								<button class="btn-icon" data-sesam-trigger="collapseMenuItems"><span
 										class="mr-2">meer</span> <i data-feather="more-vertical"></i></button>
 								<div class="collapse-menu-content flex-column align-items-end">
@@ -388,7 +391,8 @@
 									data-target="#modalTopUp">
 								<i data-feather="arrow-up"></i> topup
 							</button>
-							<button class="ml-3 btn-accent item-select-control" data-label="changeWeight" data-toggle="modal"
+							<button class="ml-3 btn-accent item-select-control" data-label="changeWeight"
+									data-toggle="modal"
 									data-target="#modalChangeWeight">
 								<i data-feather="edit"></i> verander gewicht
 							</button>
@@ -423,7 +427,8 @@
 						<h3>Instellingen</h3>
 						<div class="d-flex">
 							<div class="sudo-hide">
-								<button class="btn-blue" data-toggle="modal" data-target="#modalGoSudo"><i
+								<button class="btn-blue" data-toggle="modal" data-target="#modalGoSudo"
+										onclick="CustomSound.playClick();"><i
 										data-feather="key"></i> Aanmelden
 								</button>
 							</div>
@@ -659,7 +664,8 @@
 								<h5 class="text-modern">Gegevens</h5>
 								<p class="text-modern">Backup</p>
 								<div class="d-flex mb-4">
-									<button class="btn-blue mr-3" data-label="exportBackup"><i
+									<button class="btn-blue mr-3" data-label="exportBackup"
+											onclick="CustomSound.playClick();"><i
 											data-feather="download-cloud"></i>exporteren
 									</button>
 									<div class="sudo-show">
@@ -673,7 +679,7 @@
 								<div class="sudo-show">
 									<h5 class="text-modern">Beheer</h5>
 									<p class="text-modern">wachtwoord</p>
-									<button class="btn-blue" data-toggle="modal" data-target="#modalChangePassword"><i
+									<button class="btn-blue" data-toggle="modal" data-target="#modalChangePassword" onclick="CustomSound.playClick();"><i
 											data-feather="edit-3"></i>wijzigen
 									</button>
 									<div class="row d-none">
@@ -844,8 +850,6 @@
 </div>
 
 
-
-
 <div class="modal" id="modalTopUp" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modalTopUpLabel"
 	 aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
@@ -873,7 +877,8 @@
 	</div>
 </div>
 
-<div class="modal" id="modalChangeWeight" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modalChangeWeightLabel"
+<div class="modal" id="modalChangeWeight" data-backdrop="static" tabindex="-1" role="dialog"
+	 aria-labelledby="modalChangeWeightLabel"
 	 aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
@@ -921,8 +926,11 @@
 					<p data-error="sudoFalse"></p>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn" data-dismiss="modal"><i data-feather="x"></i>sluiten</button>
-					<button type="submit" data-label="goSudo" class="btn btn-blue"><i data-feather="key"></i>aanmelden
+					<button type="button" class="btn" data-dismiss="modal" onclick="CustomSound.playClick();"><i
+							data-feather="x"></i>sluiten
+					</button>
+					<button type="submit" data-label="goSudo" class="btn btn-blue" onclick="CustomSound.playClick();"><i
+							data-feather="key"></i>aanmelden
 					</button>
 				</div>
 			</form>
@@ -1155,6 +1163,14 @@
 	feather.replace();
 	/* Enable for bootstrap toasts 👇 */
 	$('.toast').toast('show');
+
+	class CustomSound {
+		static clickSound = new Audio('static/sounds/click_sound.mp3');
+
+		static async playClick() {
+			await this.clickSound.play();
+		}
+	}
 </script>
 </body>
 </html>

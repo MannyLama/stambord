@@ -14,6 +14,7 @@ sesamCollapse.initialize();
 
 const status = new callerName('app');
 const clicksound = new Audio('static/sounds/click_sound.mp3');
+const noSound = new Audio('static/sounds/no.mp3');
 
 export const app = {
 	initialize() {
@@ -57,21 +58,25 @@ export const app = {
 		status.add('addListeners');
 
 		userControl.posCheckout.addEventListener('change', (event) => {
+			this.playSound();
 			this.checkoutUser = event.target.value;
 			$('#carouselPosSteps').carousel('next');
 		});
 
 		itemControl.posCheckout.addEventListener('change', (event) => {
+			this.playSound();
 			this.checkoutItem = event.target.value;
 			posCheckout.amountSelector.classList.add('d-none');
 			posCheckout.checkout();
 		});
 
 		userControl.posUsers.addEventListener('click', (event) => {
+			this.playSound();
 			this.controlPaneOptions(event);
 		});
 
 		itemControl.posItems.addEventListener('click', (event) => {
+			this.playSound();
 			this.controlPaneOptions(event);
 		});
 
@@ -285,10 +290,10 @@ export const app = {
 		})
 	},
 
-	playSound() {
+	async playSound() {
 		console.log("clickSound!");
-		clicksound.play();
-	}
+		await clicksound.play();
+	},
 
 };
 

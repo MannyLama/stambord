@@ -27,7 +27,6 @@ export const uiControl = {
 
 		document.body.addEventListener('click', (event) => {
 			this.sesamCloseClickedOutside(event.target.closest('[data-sesam-target].collapse-menu'));
-
 			this.updateUserString();
 
 			if (event.target.closest('[data-label="posCheckoutFilterItemType"]') != null) {
@@ -36,13 +35,13 @@ export const uiControl = {
 			}
 		});
 
+		/*
 		document.body.addEventListener('focusout', (event) => {
-			app.playSound();
 			const floatingLabel = event.target.closest('.input-group.floating-label');
 
 			if (floatingLabel != null && floatingLabel.querySelector('input').value !== '') floatingLabel.classList.add('input-group-filled');
 			else if (floatingLabel != null && floatingLabel.classList.remove('input-group-filled')) ; //todo
-		});
+		});*/
 
 		document.querySelector('#modalScreenWidth .modal-footer').addEventListener('click', (event) => {
 			app.playSound();
