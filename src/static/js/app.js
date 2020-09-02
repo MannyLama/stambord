@@ -1,5 +1,14 @@
 import {sesamCollapse} from 'https://unpkg.com/sesam-collapse@4.0.0';
-import {callerName, dataExport, datalog, posCheckout, userControl, itemControl, settings, uiControl} from './modules/index.js';
+import {
+	callerName,
+	dataExport,
+	datalog,
+	posCheckout,
+	userControl,
+	itemControl,
+	settings,
+	uiControl
+} from './modules/index.js';
 
 sesamCollapse.initialize();
 
@@ -7,239 +16,241 @@ const status = new callerName('app');
 const clicksound = new Audio('static/sounds/click_sound.mp3');
 
 export const app = {
-    initialize() {
-        status.init();
+	initialize() {
+		status.init();
 
-        this.cache();
-        this.dexie();
-        this.addListeners();
-        this.toastIndex = 0;
+		this.cache();
+		this.dexie();
+		this.addListeners();
+		this.toastIndex = 0;
 
-        dataExport.initialize();
+		dataExport.initialize();
 
-        settings.addListeners();
-        this.readyState();
+		settings.addListeners();
+		this.readyState();
 
-        uiControl.initialize();
-    },
-
-    readyState() {
-        status.add('readyState');
-
-        // uiControl.initialize();
-        $('.modal').modal('hide');
-        $('#carouselPosSteps').carousel(0);
-        userControl.render();
-        itemControl.render();
-        datalog.render();
-        this.hidePaneOptions();
-        this.checkRecordAmount();
-        settings.loadSupportContent();
+		uiControl.initialize();
 	},
 
-    cache() {
-        this.alerts = {
-            users: document.querySelector('[data-label="alert-noUsers"]'),
-            items: document.querySelector('[data-label="alert-noItems"]')
-        }
-    },
+	readyState() {
+		status.add('readyState');
 
-    addListeners() {
-        status.add('addListeners');
+		// uiControl.initialize();
+		$('.modal').modal('hide');
+		$('#carouselPosSteps').carousel(0);
+		userControl.render();
+		itemControl.render();
+		datalog.render();
+		this.hidePaneOptions();
+		this.checkRecordAmount();
+		settings.loadSupportContent();
+	},
 
-        userControl.posCheckout.addEventListener('change', (event) => {
-            this.checkoutUser = event.target.value;
-            $('#carouselPosSteps').carousel('next');
-        });
+	cache() {
+		this.alerts = {
+			users: document.querySelector('[data-label="alert-noUsers"]'),
+			items: document.querySelector('[data-label="alert-noItems"]')
+		}
+	},
 
-        itemControl.posCheckout.addEventListener('change', (event) => {
-            this.checkoutItem = event.target.value;
-            posCheckout.amountSelector.classList.add('d-none');
-            posCheckout.checkout();
-        });
+	addListeners() {
+		status.add('addListeners');
 
-        userControl.posUsers.addEventListener('click', (event) => {
-            this.controlPaneOptions(event);
-        });
+		userControl.posCheckout.addEventListener('change', (event) => {
+			this.checkoutUser = event.target.value;
+			$('#carouselPosSteps').carousel('next');
+		});
 
-        itemControl.posItems.addEventListener('click', (event) => {
-            this.controlPaneOptions(event);
-        });
+		itemControl.posCheckout.addEventListener('change', (event) => {
+			this.checkoutItem = event.target.value;
+			posCheckout.amountSelector.classList.add('d-none');
+			posCheckout.checkout();
+		});
 
-        posCheckout.amountSelector.addEventListener('change', (event) => {
-            posCheckout.calculatePrice(event.target.value);
-        });
-    },
+		userControl.posUsers.addEventListener('click', (event) => {
+			this.controlPaneOptions(event);
+		});
 
-    controlPaneOptions(event) {
-        event.preventDefault();
+		itemControl.posItems.addEventListener('click', (event) => {
+			this.controlPaneOptions(event);
+		});
 
-        const parent = event.target.closest('div[role]');
-        const label = event.target.closest('label').getAttribute('for');
-        const checkBox = document.querySelector(`#${label}`);
+		posCheckout.amountSelector.addEventListener('change', (event) => {
+			posCheckout.calculatePrice(event.target.value);
+		});
+	},
 
-        if (checkBox.checked === true) {
-            checkBox.checked = false;
-            // nav-users
-            parent.classList.remove('show-control-btns')
-        } else {
-            checkBox.checked = true;
-            parent.classList.add('show-control-btns')
-        }
-    },
+	controlPaneOptions(event) {
+		event.preventDefault();
 
-    checkRecordAmount() {
-        status.add('checkRecordAmount');
+		const parent = event.target.closest('div[role]');
+		const label = event.target.closest('label').getAttribute('for');
+		const checkBox = document.querySelector(`#${label}`);
 
-        app.db.users.count()
-            .then(response => {
-                if (response === 0) {
-                    this.alerts.users.classList.remove('d-none');
-                } else if (response > 0) {
-                    this.alerts.users.classList.add('d-none');
-                }
-            })
-            .catch(error => {
-                status.log(error)
-            });
-        app.db.items.count()
-            .then(response => {
-                if (response === 0) {
-                    this.alerts.items.classList.remove('d-none');
-                } else if (response > 0) {
-                    this.alerts.items.classList.add('d-none');
-                }
-            })
-            .catch(error => {
-                status.log(error)
-            });
-    },
+		if (checkBox.checked === true) {
+			checkBox.checked = false;
+			// nav-users
+			parent.classList.remove('show-control-btns')
+		} else {
+			checkBox.checked = true;
+			parent.classList.add('show-control-btns')
+		}
+	},
 
-    hidePaneOptions() {
-        document.querySelectorAll('.show-control-btns').forEach(i => {
-            i.classList.remove('show-control-btns');
-        })
-    },
+	checkRecordAmount() {
+		status.add('checkRecordAmount');
 
-    emptyDomLists() {
-        status.add('emptyDomLists');
+		app.db.users.count()
+			.then(response => {
+				if (response === 0) {
+					this.alerts.users.classList.remove('d-none');
+				} else if (response > 0) {
+					this.alerts.users.classList.add('d-none');
+				}
+			})
+			.catch(error => {
+				status.log(error)
+			});
+		app.db.items.count()
+			.then(response => {
+				if (response === 0) {
+					this.alerts.items.classList.remove('d-none');
+				} else if (response > 0) {
+					this.alerts.items.classList.add('d-none');
+				}
+			})
+			.catch(error => {
+				status.log(error)
+			});
+	},
 
-        itemControl.posItems.innerHTML = '';
-        userControl.posUsers.innerHTML = '';
-    },
+	hidePaneOptions() {
+		document.querySelectorAll('.show-control-btns').forEach(i => {
+			i.classList.remove('show-control-btns');
+		})
+	},
 
-    dexie() {
-        status.add('dexie');
+	emptyDomLists() {
+		status.add('emptyDomLists');
 
-        this.db = new Dexie('users');
-        this.db.version(1).stores({
-            users: "id,name,credit,weight",
-            items: "id,name,profit,type,price",
-            logs: "date,user,item,amount,price"
-        });
-        this.db.open();
-    },
+		itemControl.posItems.innerHTML = '';
+		userControl.posUsers.innerHTML = '';
+	},
 
-    deleteDexieData() {
-        status.add('deleteDexieData');
+	dexie() {
+		status.add('dexie');
 
-        status.add('dexieDeleteUsers: ' + this.dexieDeleteUsers());
-        this.dexieDeleteItems();
-        this.dexieDeleteLogs();
+		this.db = new Dexie('users');
+		this.db.version(1).stores({
+			users: "id,name,credit,weight",
+			items: "id,name,profit,type,price",
+			logs: "date,user,item,amount,price"
+		});
+		this.db.open();
+	},
 
-        this.readyState();
-    },
+	deleteDexieData() {
+		status.add('deleteDexieData');
 
-    async dexieDeleteUsers() {
-        status.add('dexieDeleteUsers');
+		status.add('dexieDeleteUsers: ' + this.dexieDeleteUsers());
+		this.dexieDeleteItems();
+		this.dexieDeleteLogs();
 
-        this.db.users
-            .where('id').startsWith('user')
-            .delete()
-            .then(function (deleteCount) {
-                //console.log( "Deleted " + deleteCount + " user-objects");
-            });
-    },
+		this.readyState();
+	},
 
-    async dexieDeleteItems() {
-        status.add('dexieDeleteItems');
+	async dexieDeleteUsers() {
+		status.add('dexieDeleteUsers');
 
-        this.db.items
-            .where('id').startsWith('item')
-            .delete()
-            .then(function (deleteCount) {
-                //console.log( "Deleted " + deleteCount + " item-objects");
-            });
-    },
+		this.db.users
+			.where('id').startsWith('user')
+			.delete()
+			.then(function (deleteCount) {
+				//console.log( "Deleted " + deleteCount + " user-objects");
+			});
+	},
 
-    async dexieDeleteLogs() {
-        status.add('dexieDeleteLogs');
+	async dexieDeleteItems() {
+		status.add('dexieDeleteItems');
 
-        this.db.logs
+		this.db.items
+			.where('id').startsWith('item')
+			.delete()
+			.then(function (deleteCount) {
+				//console.log( "Deleted " + deleteCount + " item-objects");
+			});
+	},
+
+	async dexieDeleteLogs() {
+		status.add('dexieDeleteLogs');
+
+		this.db.logs
 			//.where('amount').above(0)
 			//.delete()
 			.clear()
-            .then(function (deleteCount) {
-                //console.log( "Deleted " + deleteCount + " log-objects");
-            });
-    },
+			.then(function (deleteCount) {
+				//console.log( "Deleted " + deleteCount + " log-objects");
+			});
+	},
 
-    logging() {
-        status.add('logging');
-    },
+	logging() {
+		status.add('logging');
+	},
 
-    clearFields(target) {
-        status.add('clearFields');
+	clearFields(target) {
+		status.add('clearFields');
 
-        if (target === undefined) {
-            const fields = document.querySelectorAll('[data-clear-field]');
+		if (target === undefined) {
+			const fields = document.querySelectorAll('[data-clear-field]');
 
-            fields.forEach(i => {
-                i.value = '';
-            })
-        } else {
-            target.querySelectorAll('input[type="text"], input[type="number"], input[type="password"]').forEach(i => {
-                i.value = '';
-            })
-        }
-    },
+			fields.forEach(i => {
+				i.value = '';
+			})
+		} else {
+			target.querySelectorAll('input[type="text"], input[type="number"], input[type="password"]').forEach(i => {
+				i.value = '';
+			})
+		}
+	},
 
-    clearFieldsOnSubmit(target) {
-        target.querySelectorAll('input[type="text"], input[type="number"]').forEach(i => {
-            i.value = '';
-        })
-    },
+	clearFieldsOnSubmit(target) {
+		target.querySelectorAll('input[type="text"], input[type="number"]').forEach(i => {
+			i.value = '';
+		})
+	},
 
-    createToast(title, message) {
-        status.add('createToast');
+	createToast(title, message) {
+		status.add('createToast');
 
-        let now, moment;
-        function addZero(i) {
-            if (i < 10) {
-                i = "0" + i;
-            }
-            return i;
-        }
-        now = new Date();
-        moment = {
-            dd: addZero(now.getDate()),
-            mm: addZero(now.getMonth() + 1),
-            yyyy: now.getFullYear(),
-            hh: addZero(now.getHours()),
-            nn: addZero(now.getMinutes()),
-        };
+		let now, moment;
 
-        let toast = document.createElement('div');
-        this.toastIndex ++;
+		function addZero(i) {
+			if (i < 10) {
+				i = "0" + i;
+			}
+			return i;
+		}
 
-        toast.classList.add('toast', 'animated', 'fadeInUp', 'faster');
-        toast.setAttribute('data-toast', `toastIndex${this.toastIndex}`);
-        toast.setAttribute('data-delay', `3500`);
-        toast.setAttribute('role', `alert`);
-        toast.setAttribute('aria-atomic', `true`);
-        toast.setAttribute('aria-live', `assertive`);
+		now = new Date();
+		moment = {
+			dd: addZero(now.getDate()),
+			mm: addZero(now.getMonth() + 1),
+			yyyy: now.getFullYear(),
+			hh: addZero(now.getHours()),
+			nn: addZero(now.getMinutes()),
+		};
 
-        toast.innerHTML = `
+		let toast = document.createElement('div');
+		this.toastIndex++;
+
+		toast.classList.add('toast', 'animated', 'fadeInUp', 'faster');
+		toast.setAttribute('data-toast', `toastIndex${this.toastIndex}`);
+		toast.setAttribute('data-delay', `3500`);
+		toast.setAttribute('role', `alert`);
+		toast.setAttribute('aria-atomic', `true`);
+		toast.setAttribute('aria-live', `assertive`);
+
+		toast.innerHTML = `
             <div class="toast-body">
                 <p class="toast-title mr-auto text-modern bold mb-0">${title}</p>
                 <p class="toast-content mb-0">${message}</p>
@@ -250,30 +261,38 @@ export const app = {
             </button>
         `;
 
-        toast.addEventListener('animationend', function() {toast.classList.add('animated', 'fadeOutDown', 'delay-3s')})
+		toast.addEventListener('animationend', function () {
+			toast.classList.add('animated', 'fadeOutDown', 'delay-3s')
+		})
 
-        document.querySelector('#toastContainer').appendChild(toast);
+		document.querySelector('#toastContainer').appendChild(toast);
 
-        try{
-        	feather.replace();
+		try {
+			feather.replace();
 		} catch (e) {
 			console.log(e);
 		}
 
-        $(`[data-toast="toastIndex${this.toastIndex}"]`).toast('show');
-    },
+		$(`[data-toast="toastIndex${this.toastIndex}"]`).toast('show');
+		let secondTime = false;
+		toast.onanimationend = function () {
+			if (secondTime){
+				document.querySelector('#toastContainer').removeChild(toast)
+			} else { secondTime = true;}
+		};
+	},
 
-    errorText(element, content) {
-        element = document.querySelectorAll(`[data-error="${element}"]`);
-        element.forEach((el) => {
-            // el.style.display = 'block !important';
-            el.innerHTML = content;
-        })
-    },
+	errorText(element, content) {
+		element = document.querySelectorAll(`[data-error="${element}"]`);
+		element.forEach((el) => {
+			// el.style.display = 'block !important';
+			el.innerHTML = content;
+		})
+	},
 
-    playSound(){
-    	console.log("clickSound!");
-    	clicksound.play();
+	playSound() {
+		console.log("clickSound!");
+		clicksound.play();
 	}
 
 };
