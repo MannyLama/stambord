@@ -19,10 +19,6 @@ export const datalog = {
     },
 
     addListeners() {
-        // setInterval(() => {
-        //     datalog.render();
-        // }, 1000 * 30);
-
         $('#nav-log-tab').on('shown.bs.tab', (event) => {
             datalog.render();
         })
@@ -39,7 +35,6 @@ export const datalog = {
             user: {
                 id: entry.user.id,
                 name: entry.user.name,
-				weight: entry.user.weight
             },
             item: entry.item,
             amount: entry.amount,

@@ -63,6 +63,7 @@ export const dataExport = {
         });
 
         await app.db.items.each(i => {
+        	console.log(i.id + " " + i.name + " " + i.price + " " + i.profit + " " + i.type);
             this.exportedData.items.push({
                 id: i.id,
                 name: i.name,
@@ -135,7 +136,14 @@ export const dataExport = {
             app.deleteDexieData();
 
             await importedData.items.forEach(i => {
-                itemControl.add({
+				//** check for nan, nulls, ... otherwise 0
+				for (let j = 0; j < i.price.length; j++) {
+					i.price[j] = i.price[j] || 0;
+				}
+				i.profit = i.profit || 0;
+				//**
+
+				itemControl.add({
                     id: i.id,
                     name: i.name,
                     profit: i.profit,

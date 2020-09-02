@@ -32,7 +32,7 @@ export const itemControl = {
             const formData = new FormData(this.addItemForm);
             this.add({
                 name: formData.get('name'),
-                profit: parseFloat(formData.get('price')),
+                profit: parseFloat(formData.get('profit')),
                 type: formData.get('itemType'),
                 price: [parseFloat(formData.get('priceSingle')), parseFloat(formData.get('priceDouble')), parseFloat(formData.get('priceExtra'))],
             });
@@ -91,6 +91,7 @@ export const itemControl = {
     add(entry) {
         status.log('this item will be added ' + entry.name);
         if (entry.id === undefined) {entry.id = `item${generateID()}`}
+        console.log("price =" + entry.price + "  profit= " + entry.profit);
         app.db.items.put({
             id: entry.id,
             name: entry.name,
