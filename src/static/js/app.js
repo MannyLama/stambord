@@ -293,8 +293,7 @@ export const app = {
 	async playSound() {
 		console.log("clickSound!");
 		await clicksound.play();
-	},
-
+	}
 };
 
 app.initialize();

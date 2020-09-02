@@ -1,4 +1,4 @@
-import {app, generateID, callerName} from './index.js';
+import {app, generateID, callerName, datalog} from './index.js';
 
 const status = new callerName('userControl');
 
@@ -66,7 +66,7 @@ export const userControl = {
 
 		this.tabFunctions.addEventListener('click', (event) => {
 			const targetBtn = event.target.closest('button').dataset.label;
-			app.playError();
+			app.playSound();
 
 			let selectedItem;
 			try{
@@ -172,6 +172,20 @@ export const userControl = {
 			else
 				status.log("Nothing was updated - there were no friend with primary key: 2");
 		});
+
+		datalog.addLog({
+			user: {
+				id: userData.id,
+				name: userData.name
+			},
+			item: {
+				name: "<b>Top-up</b>",
+				quantity: 1
+			},
+			amount: 0,
+			price: parseFloat(credit)
+		});
+
 		$('#modalTopUp').modal('hide');
 		this.render();
 	},
